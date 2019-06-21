@@ -120,7 +120,7 @@ ReactiveCocoa用法大全
 	    }];
 	}
 	
-###测试RACMulticastConnection
+### 测试RACMulticastConnection
 
 	/**
 	 测试RACMulticastConnection
@@ -174,7 +174,7 @@ ReactiveCocoa用法大全
 	    //注意：subsciber 会给所有的订阅者发送消息。（类似与RACSubject），虽然subScriber只被保存了一次
 	}
 	
-###测试RACCommand
+### 测试RACCommand
 
 	/**
 	 测试RACCommand
@@ -299,7 +299,7 @@ ReactiveCocoa用法大全
 	    [command5 execute:@5];
 	}
 	
-###常用的宏以及简单用法
+### 常用的宏以及简单用法
 
 	/**
 	 常用的宏
@@ -409,7 +409,7 @@ ReactiveCocoa用法大全
 	    }];
 	}
 	
-###测试RAC-bind
+### 测试RAC-bind
 
 
 	/**
@@ -447,7 +447,7 @@ ReactiveCocoa用法大全
 	    RACChannelTo(self.label, text) = RACChannelTo(self.textView, text);
 	}
 	
-###RAC-过滤
+### RAC-过滤
 
 	/**
 	 RAC-过滤
@@ -541,7 +541,7 @@ ReactiveCocoa用法大全
 	    }];
 	}
 	
-###RAC-映射
+### RAC-映射
 
 	/**
 	 RAC-映射
@@ -618,7 +618,7 @@ ReactiveCocoa用法大全
 	}
 	
 	
-###RAC-组合
+### RAC-组合
 
 	/**
 	 RAC-组合
