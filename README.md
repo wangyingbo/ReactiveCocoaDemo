@@ -128,7 +128,7 @@ ReactiveCocoa用法大全
 	 用于当一个信号，被多次订阅时，为了保证创建信号时，避免多次调用创建信号中的block，造成副作用，可以使用这个类处理。
 	 */
 	- (void)rac_multicastConnection {
-	    // 普通写法, 这样的缺点是：没订阅一次信号就得重新创建并发送请求，这样很不友好
+	    // 普通写法, 这样的缺点是：每订阅一次信号就得重新创建并发送请求，这样很不友好
 	    RACSignal *signal = [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
 	        // didSubscribeblock中的代码都统称为副作用。
 	        // 发送请求---比如afn
