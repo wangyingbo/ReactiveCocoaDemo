@@ -11,8 +11,10 @@
 @interface HomeVC ()
 @property (nonatomic, strong) UITextView *textView;
 
-///dataArray
-@property (atomic,strong) NSMutableArray *dataArray;
+/**dataArray用信号量的话，没必要用atomic*/
+@property (nonatomic,strong) NSMutableArray *dataArray;
+@property (nonatomic, strong) NSTimer *timer;
+
 @end
 
 @implementation HomeVC
@@ -23,6 +25,8 @@
     [self configUI];
     
     [self testAtomic];
+    
+    [self configTimer];
 }
 
 #pragma mark - configUI
@@ -47,21 +51,28 @@
 - (void)testAtomic {
     self.dataArray = [NSMutableArray array];
     
-    dispatch_semaphore_t signal = dispatch_semaphore_create(0);
-    for (int i = 0; i<10; i++) {
-        ///并发队列 异步任务 具备开启多个线程能力
-        dispatch_queue_t queue = dispatch_queue_create("queue",DISPATCH_QUEUE_CONCURRENT);
-        ///写入任务
-        dispatch_async(queue, ^{
-            [self write:@(i)];
-        });
-        ///读取任务
-        dispatch_async(queue, ^{
-            [self read];
-            dispatch_semaphore_signal(signal);
-        });
-        dispatch_semaphore_wait(signal, DISPATCH_TIME_FOREVER);
-    }
+    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+        
+        dispatch_semaphore_t signal = dispatch_semaphore_create(0);
+        for (int i = 0; i<10; i++) {
+            ///并发队列 异步任务 具备开启多个线程能力
+            dispatch_queue_t queue = dispatch_queue_create("queue",DISPATCH_QUEUE_CONCURRENT);
+            ///写入任务
+            dispatch_async(queue, ^{
+                [self write:@(i)];
+            });
+            ///读取任务
+            dispatch_async(queue, ^{
+                [self read];
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), queue, ^{
+                    //NSLog(@"------task------%@", [NSThread currentThread]);
+                    dispatch_semaphore_signal(signal);
+                });
+            });
+            dispatch_semaphore_wait(signal, DISPATCH_TIME_FOREVER);
+        }
+        
+    });
 
 }
 
@@ -72,6 +83,17 @@
 ///写入操作
 - (void) write:(id)obj {
     [self.dataArray addObject:obj];
+}
+
+- (void)configTimer {
+    if (@available(iOS 10.0, *)) {
+        self.timer = [NSTimer scheduledTimerWithTimeInterval:1 repeats:YES block:^(NSTimer * _Nonnull timer) {
+            NSLog(@"定时器走：%f",[[NSDate date] timeIntervalSince1970]);
+        }];
+    } else {
+        // Fallback on earlier versions
+    }
+    [[NSRunLoop currentRunLoop]addTimer:self.timer forMode:NSDefaultRunLoopMode];
 }
 
 @end
