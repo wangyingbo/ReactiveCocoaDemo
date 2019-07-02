@@ -20,6 +20,7 @@
 		D15E3DBD22B9CA21008117AC /* ReactiveCocoaDemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D15E3DBC22B9CA21008117AC /* ReactiveCocoaDemoTests.m */; };
 		D15E3DC822B9CA21008117AC /* ReactiveCocoaDemoUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = D15E3DC722B9CA21008117AC /* ReactiveCocoaDemoUITests.m */; };
 		D1A51CD722CB36D300EBD552 /* CustomView.m in Sources */ = {isa = PBXBuildFile; fileRef = D1A51CD622CB36D300EBD552 /* CustomView.m */; };
+		D1A51CDF22CB4D2A00EBD552 /* YBCellObject.m in Sources */ = {isa = PBXBuildFile; fileRef = D1A51CDE22CB4D2A00EBD552 /* YBCellObject.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -70,6 +71,9 @@
 		D15E3DC922B9CA21008117AC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D1A51CD522CB36D300EBD552 /* CustomView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CustomView.h; sourceTree = "<group>"; };
 		D1A51CD622CB36D300EBD552 /* CustomView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CustomView.m; sourceTree = "<group>"; };
+		D1A51CDD22CB4D2A00EBD552 /* YBCellObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YBCellObject.h; sourceTree = "<group>"; };
+		D1A51CDE22CB4D2A00EBD552 /* YBCellObject.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YBCellObject.m; sourceTree = "<group>"; };
+		D1A51CE022CB4DC600EBD552 /* YBCellObject+Private.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "YBCellObject+Private.h"; sourceTree = "<group>"; };
 		F73B4B5109542C20F6D1806D /* libPods-ReactiveCocoaDemo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ReactiveCocoaDemo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -155,8 +159,8 @@
 				D15E3DA722B9CA20008117AC /* ViewController.m */,
 				D12A06B822B9D4E1009518B9 /* HomeVC.h */,
 				D12A06B922B9D4E1009518B9 /* HomeVC.m */,
-				D1A51CD522CB36D300EBD552 /* CustomView.h */,
-				D1A51CD622CB36D300EBD552 /* CustomView.m */,
+				D1A51CDC22CB4D0700EBD552 /* Models */,
+				D1A51CD822CB475200EBD552 /* Views */,
 				D15E3DA922B9CA20008117AC /* Main.storyboard */,
 				D15E3DAC22B9CA21008117AC /* Assets.xcassets */,
 				D15E3DAE22B9CA21008117AC /* LaunchScreen.storyboard */,
@@ -184,6 +188,25 @@
 				D15E3DC922B9CA21008117AC /* Info.plist */,
 			);
 			path = ReactiveCocoaDemoUITests;
+			sourceTree = "<group>";
+		};
+		D1A51CD822CB475200EBD552 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				D1A51CD522CB36D300EBD552 /* CustomView.h */,
+				D1A51CD622CB36D300EBD552 /* CustomView.m */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		D1A51CDC22CB4D0700EBD552 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				D1A51CDD22CB4D2A00EBD552 /* YBCellObject.h */,
+				D1A51CDE22CB4D2A00EBD552 /* YBCellObject.m */,
+				D1A51CE022CB4DC600EBD552 /* YBCellObject+Private.h */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -389,6 +412,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D1A51CD722CB36D300EBD552 /* CustomView.m in Sources */,
+				D1A51CDF22CB4D2A00EBD552 /* YBCellObject.m in Sources */,
 				D15E3DA822B9CA20008117AC /* ViewController.m in Sources */,
 				D12A06BA22B9D4E1009518B9 /* HomeVC.m in Sources */,
 				D15E3DB322B9CA21008117AC /* main.m in Sources */,

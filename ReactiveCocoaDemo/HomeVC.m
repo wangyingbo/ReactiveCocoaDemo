@@ -8,12 +8,13 @@
 
 #import "HomeVC.h"
 #import "CustomView.h"
+#import "YBCellObject.h"
 
 @interface HomeVC ()
 @property (nonatomic, strong) UITextView *textView;
 @property (nonatomic, strong) CustomView *myView;
 
-/**dataArray用信号量的话，没必要用atomic*/
+/**dataArray-用信号量锁线程的话，没必要用atomic*/
 @property (nonatomic,strong) NSMutableArray *dataArray;
 @property (nonatomic, strong) NSTimer *timer;
 
@@ -62,6 +63,12 @@
         make.top.mas_equalTo(self.textView.mas_bottom).mas_offset(65.);
         make.width.height.mas_equalTo(50.);
     }];
+    
+    YBCellObject *cellObj = [YBCellObject objectWithCellClass:[CustomView class]];
+    if ([cellObj respondsToSelector:@selector(cellClass)]) {
+        //NSLog(@"对类%@的扩展extension，不是类的category，通过getter方法来实现协议里的方法",NSStringFromClass([YBCellObject class]));
+        //NSLog(@"类名：%@",NSStringFromClass(cellObj.cellClass));
+    }
 }
 
 #pragma mark - actions
