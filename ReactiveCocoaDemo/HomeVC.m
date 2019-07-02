@@ -7,9 +7,11 @@
 //
 
 #import "HomeVC.h"
+#import "CustomView.h"
 
 @interface HomeVC ()
 @property (nonatomic, strong) UITextView *textView;
+@property (nonatomic, strong) CustomView *myView;
 
 /**dataArray用信号量的话，没必要用atomic*/
 @property (nonatomic,strong) NSMutableArray *dataArray;
@@ -29,6 +31,12 @@
     [self configTimer];
 }
 
+- (void)dealloc {
+    NSLog(@"%@销毁了",NSStringFromClass([self class]));
+    [self.timer invalidate];
+    NSLog(@"定时器销毁了");
+}
+
 #pragma mark - configUI
 - (void)configUI {
     self.view.backgroundColor = [UIColor whiteColor];
@@ -39,10 +47,20 @@
     textView.layer.borderColor = [UIColor lightGrayColor].CGColor;
     [self.view addSubview:textView];
     self.textView = textView;
-    
     [self.textView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.center.mas_equalTo(self.view);
         make.width.mas_equalTo(self.view).mas_offset(-100);
+        make.height.mas_equalTo(100.);
+    }];
+    
+    CustomView *myView = [[CustomView alloc] init];
+    myView.backgroundColor = [UIColor redColor];
+    [self.view addSubview:myView];
+    self.myView = myView;
+    [self.myView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.mas_equalTo(self.textView);
+        make.top.mas_equalTo(self.textView.mas_bottom).mas_offset(65.);
+        make.width.height.mas_equalTo(50.);
     }];
 }
 
@@ -59,6 +77,7 @@
             dispatch_queue_t queue = dispatch_queue_create("queue",DISPATCH_QUEUE_CONCURRENT);
             ///写入任务
             dispatch_async(queue, ^{
+                NSLog(@"------task------%@", [NSThread currentThread]);
                 [self write:@(i)];
             });
             ///读取任务
