@@ -10,7 +10,9 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface CustomView : UIView
+@interface CustomView<__covariant ValueType> : UIView
+
+- (void)addTask:(void(^)(ValueType _Nullable type))handler;
 
 @end
 
