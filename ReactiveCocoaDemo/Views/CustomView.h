@@ -14,6 +14,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)addTask:(void(^)(ValueType _Nullable type))handler;
 
+- (CustomView<__kindof UIView *> *)with;
+
 @end
 
 NS_ASSUME_NONNULL_END

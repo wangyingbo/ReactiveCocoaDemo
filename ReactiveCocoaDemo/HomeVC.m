@@ -9,6 +9,9 @@
 #import "HomeVC.h"
 #import "CustomView.h"
 #import "YBCellObject.h"
+#import "Grade.h"
+#import "Stack.h"
+
 
 @interface HomeVC ()
 @property (nonatomic, strong) UITextView *textView;
@@ -39,6 +42,7 @@
 }
 
 #pragma mark - configUI
+
 - (void)configUI {
     self.view.backgroundColor = [UIColor whiteColor];
     
@@ -56,8 +60,7 @@
     
     CustomView *myView = [[CustomView alloc] init];
     myView.backgroundColor = [UIColor redColor];
-    [myView addTask:^(id  _Nullable type) {
-        
+    [[myView with] addTask:^(__kindof UIView * _Nullable type) {
     }];
     [self.view addSubview:myView];
     self.myView = myView;
@@ -72,6 +75,34 @@
         //NSLog(@"对类%@的扩展extension，不是类的category，通过getter方法来实现协议里的方法",NSStringFromClass([YBCellObject class]));
         //NSLog(@"类名：%@",NSStringFromClass(cellObj.cellClass));
     }
+}
+
+#pragma mark - configData
+
+- (void) initData {
+    School *school = [[School alloc] init];
+    [[school with] addTask:^(__kindof NSString * _Nullable x) {
+        
+    }];
+    
+    Stack *myStack = [[Stack alloc] init];
+    [myStack pushObject:@(100)];
+    [myStack pushObject:@"string"];
+    [myStack pushObject:school];
+    [myStack pushObject:[school type]];
+    [myStack pushObject:([UIImage imageNamed:@""])];
+    [myStack pushObject:([[UIView alloc] initWithFrame:CGRectZero])];
+    
+    
+    Stack *stack; [stack class]; // Stack *
+    Stack<NSString *> *stringStack; // Stack<NSString *>
+    Stack<NSMutableString *> *mutableStringStack; // Stack<NSMutableString *>
+    
+    //协变<__covariant ObjectType>
+    stringStack = mutableStringStack;
+    //逆变<__contravariant ObjectType>
+    mutableStringStack = stringStack;
+    
 }
 
 #pragma mark - actions
