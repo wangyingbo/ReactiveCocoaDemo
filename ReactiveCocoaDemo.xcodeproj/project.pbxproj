@@ -24,6 +24,7 @@
 		D1933F7D22F1709300CAADF4 /* Grade.m in Sources */ = {isa = PBXBuildFile; fileRef = D1933F7C22F1709300CAADF4 /* Grade.m */; };
 		D1A51CD722CB36D300EBD552 /* CustomView.m in Sources */ = {isa = PBXBuildFile; fileRef = D1A51CD622CB36D300EBD552 /* CustomView.m */; };
 		D1A51CDF22CB4D2A00EBD552 /* YBCellObject.m in Sources */ = {isa = PBXBuildFile; fileRef = D1A51CDE22CB4D2A00EBD552 /* YBCellObject.m */; };
+		D1B7C779231F9DCE003A3BDA /* Promise.m in Sources */ = {isa = PBXBuildFile; fileRef = D1B7C778231F9DCE003A3BDA /* Promise.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -83,6 +84,10 @@
 		D1A51CDD22CB4D2A00EBD552 /* YBCellObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YBCellObject.h; sourceTree = "<group>"; };
 		D1A51CDE22CB4D2A00EBD552 /* YBCellObject.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YBCellObject.m; sourceTree = "<group>"; };
 		D1A51CE022CB4DC600EBD552 /* YBCellObject+Private.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "YBCellObject+Private.h"; sourceTree = "<group>"; };
+		D1B7C777231F9DCE003A3BDA /* Promise.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Promise.h; sourceTree = "<group>"; };
+		D1B7C778231F9DCE003A3BDA /* Promise.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Promise.m; sourceTree = "<group>"; };
+		D1B7C77A231F9DF7003A3BDA /* Promise+Extension.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Promise+Extension.h"; sourceTree = "<group>"; };
+		D1B7C77E231FA830003A3BDA /* PromiseKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PromiseKit.h; sourceTree = "<group>"; };
 		F73B4B5109542C20F6D1806D /* libPods-ReactiveCocoaDemo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ReactiveCocoaDemo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -198,6 +203,7 @@
 				D15E3DA722B9CA20008117AC /* ViewController.m */,
 				D12A06B822B9D4E1009518B9 /* HomeVC.h */,
 				D12A06B922B9D4E1009518B9 /* HomeVC.m */,
+				D1B7C773231F998E003A3BDA /* Promise */,
 				D1A51CDC22CB4D0700EBD552 /* Models */,
 				D1A51CD822CB475200EBD552 /* Views */,
 				D15E3DA922B9CA20008117AC /* Main.storyboard */,
@@ -246,6 +252,17 @@
 				D15B441822F17EAC00F092AB /* School */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		D1B7C773231F998E003A3BDA /* Promise */ = {
+			isa = PBXGroup;
+			children = (
+				D1B7C777231F9DCE003A3BDA /* Promise.h */,
+				D1B7C778231F9DCE003A3BDA /* Promise.m */,
+				D1B7C77A231F9DF7003A3BDA /* Promise+Extension.h */,
+				D1B7C77E231FA830003A3BDA /* PromiseKit.h */,
+			);
+			path = Promise;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -459,6 +476,7 @@
 				D1933F7D22F1709300CAADF4 /* Grade.m in Sources */,
 				D15E3DB322B9CA21008117AC /* main.m in Sources */,
 				D15E3DA522B9CA20008117AC /* AppDelegate.m in Sources */,
+				D1B7C779231F9DCE003A3BDA /* Promise.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

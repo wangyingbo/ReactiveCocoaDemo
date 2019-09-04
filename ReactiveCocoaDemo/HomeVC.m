@@ -11,6 +11,7 @@
 #import "YBCellObject.h"
 #import "Grade.h"
 #import "Stack.h"
+#import "PromiseKit.h"
 
 
 @interface HomeVC ()
@@ -28,11 +29,15 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self configUI];
+    self.view.backgroundColor = [UIColor whiteColor];
     
-    [self testAtomic];
+    //[self configUI];
     
-    [self configTimer];
+    //[self testAtomic];
+    
+    //[self configTimer];
+    
+    [self configPromise];
 }
 
 - (void)dealloc {
@@ -44,7 +49,6 @@
 #pragma mark - configUI
 
 - (void)configUI {
-    self.view.backgroundColor = [UIColor whiteColor];
     
     //textView
     UITextView *textView = [[UITextView alloc] init];
@@ -103,6 +107,41 @@
     //逆变<__contravariant ObjectType>
     mutableStringStack = stringStack;
     
+}
+
+- (void)configPromise {
+    [[self work1] then:^id _Nullable(NSString * _Nullable value) {
+        NSLog(@"分割线1--%@",value);
+        return [self work3];
+    }];
+}
+
+- (Promise<NSString *> *)work1 {
+    return [Promise dowork:^id _Nullable{
+        NSLog(@"mark-------1");
+        return @"work1";
+    }];
+}
+
+- (Promise<NSNumber *> *)work2 {
+    return [Promise dowork:^id _Nullable{
+        NSLog(@"mark-------2");
+        return @(2);
+    }];
+}
+
+- (Promise<NSValue *> *)work3 {
+    return [Promise dowork:^id _Nullable{
+        NSLog(@"mark-------3");
+        return [NSValue valueWithCGSize:CGSizeMake(100, 200)];
+    }];
+}
+
+- (Promise<NSString *> *)work4 {
+    return [Promise dowork:^id _Nullable{
+        NSLog(@"mark-------4");
+        return @"work4";
+    }];
 }
 
 #pragma mark - actions
