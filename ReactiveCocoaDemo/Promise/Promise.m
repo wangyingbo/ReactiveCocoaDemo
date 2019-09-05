@@ -10,13 +10,18 @@
 #import "Promise+Extension.h"
 
 static dispatch_queue_t kPromiseDefaultDispatchQueue;
+#define Lock() dispatch_semaphore_wait(self->_semaphore, DISPATCH_TIME_FOREVER)
+#define Unlock() dispatch_semaphore_signal(self->_semaphore)
 
 @interface Promise ()
 @property (nonatomic, copy) PromiseThenWorkBlock thenBlock;
-
+@property (nonatomic, strong) id returnThenValue;
+@property (nonatomic, copy) void(^observerBlock)(void);
+@property (nonatomic, strong) NSObject *tool;
 @end
 
 @implementation Promise {
+    dispatch_semaphore_t _semaphore;
 }
 
 + (void)initialize {
@@ -48,6 +53,12 @@ static dispatch_queue_t kPromiseDefaultDispatchQueue;
     }
 }
 
+- (void)setReturnThenValue:(id)returnThenValue {
+    @synchronized (self) {
+        _returnThenValue = returnThenValue;
+    }
+}
+
 - (instancetype)initPending {
     self = [super init];
     if (self) {
@@ -59,9 +70,25 @@ static dispatch_queue_t kPromiseDefaultDispatchQueue;
 #pragma mark - extension
 
 - (Promise *)then:(PromiseThenWorkBlock)block {
-    Promise *promise = [[Promise alloc] initPending];
-    promise.thenBlock = block;
-    return promise;
+    if (self.thenBlock) {
+        Promise *promise = [[Promise alloc] initPending];
+        __weak typeof(self)weakSelf = self;
+        dispatch_group_async(Promise.dispatchGroup, Promise.defaultDispatchQueue, ^{
+            __strong typeof(weakSelf)self = weakSelf;
+            id lastReturnThenValue = _returnThenValue;
+            promise.thenBlock = block;
+            id returnThenValue = promise.thenBlock(lastReturnThenValue);
+            if (returnThenValue) {
+                self.returnThenValue = returnThenValue;
+                dispatch_group_leave(Promise.dispatchGroup);
+            }
+        });
+        return promise;
+        
+    }else {
+        self.thenBlock = block;
+        return self;
+    }
 }
 
 + (instancetype)dowork:(PromiseDoWorkBlock)work {
@@ -69,10 +96,9 @@ static dispatch_queue_t kPromiseDefaultDispatchQueue;
     __block id returnDoValue = nil;
     dispatch_group_async(Promise.dispatchGroup, Promise.defaultDispatchQueue, ^{
         returnDoValue = !work?nil:work();
+        id returnThenValue = !promise.thenBlock?returnDoValue:promise.thenBlock(returnDoValue);
+        promise.returnThenValue = returnThenValue;
         dispatch_group_leave(Promise.dispatchGroup);
-    });
-    dispatch_group_notify(Promise.dispatchGroup, Promise.defaultDispatchQueue, ^{
-        id returnThenValue = !promise.thenBlock?nil:promise.thenBlock(returnDoValue);
     });
     
     return promise;

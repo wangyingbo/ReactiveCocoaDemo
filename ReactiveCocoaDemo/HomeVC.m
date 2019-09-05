@@ -110,10 +110,15 @@
 }
 
 - (void)configPromise {
-    [[self work1] then:^id _Nullable(NSString * _Nullable value) {
-        NSLog(@"分割线1--%@",value);
-        return [self work3];
+    [[[self work1] then:^id _Nullable(NSString * _Nullable value) {
+        NSLog(@"then1--%@",value);
+        //return [self work3];
+        return @"哈哈哈哈";
+    }] then:^id _Nullable(NSString * _Nullable value) {
+        NSLog(@"then2--%@",value);
+        return @"我日了";
     }];
+    
 }
 
 - (Promise<NSString *> *)work1 {
