@@ -66,6 +66,9 @@
     myView.backgroundColor = [UIColor redColor];
     [[myView with] addTask:^(__kindof UIView * _Nullable type) {
     }];
+    [((CustomView<UIView *> *)myView) next:^(UIView * _Nonnull obj) {
+        
+    }];
     [self.view addSubview:myView];
     self.myView = myView;
     [self.myView mas_makeConstraints:^(MASConstraintMaker *make) {

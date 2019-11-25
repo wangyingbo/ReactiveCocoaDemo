@@ -9,12 +9,15 @@
 #import <UIKit/UIKit.h>
 
 NS_ASSUME_NONNULL_BEGIN
-
 @interface CustomView<__covariant ValueType> : UIView
+
+typedef void(^hanlder)(ValueType obj);
 
 - (void)addTask:(void(^)(ValueType _Nullable type))handler;
 
 - (CustomView<__kindof UIView *> *)with;
+
+- (void)next:(hanlder)hanlder;
 
 @end
 

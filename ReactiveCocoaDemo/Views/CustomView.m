@@ -23,4 +23,8 @@
     !handler?:handler(dic);
 }
 
+- (void)next:(hanlder)hanlder {
+    !hanlder?:hanlder(self);
+}
+
 @end
