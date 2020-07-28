@@ -51,6 +51,14 @@
 - (void)configUI {
     self.view.backgroundColor = [UIColor whiteColor];
     
+    @onExit{
+        /**原理：
+         http://blog.sunnyxx.com/2014/09/15/objc-attribute-cleanup/
+         https://www.jianshu.com/p/965f6f903114
+        */
+        NSLog(@"在方法执行的最后响应！");
+    };
+    
     //textView
     UITextView *textView = [[UITextView alloc] init];
     textView.layer.borderWidth = .5;
@@ -99,6 +107,8 @@
         make.top.mas_equalTo(self.textView.mas_bottom).mas_offset(80);
         make.centerX.mas_equalTo(self.textView);
     }];
+    
+    NSLog(@"方法执行到最后了！");
 }
 
 #pragma mark - actions
